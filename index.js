@@ -59,8 +59,6 @@ console.log(finalsData);
 //     return years;
 // };
 
-// console.log(getYears(getFinals(fifaData)));
-
 function getYears(callback){
     return callback.map(function(item){
         return item.Year;
@@ -75,11 +73,42 @@ console.log(years);
 
 /* Task 4: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
-function getWinners(callback) {
-    
+// function getWinners(callback) {
+//     let winners = [];
+//     callback.forEach(function(item){
+//         if(item["Away Team Goals"] > item["Home Team Goals"]){
+//             winners.push(item["Away Team Name"]);
+//         };
+//         if(item["Away Team Goals"] < item["Home Team Goals"]){
+//             winners.push(item["Home Team Name"]);
+//         };
+//     });
+//     return winners;
+// };
+
+// console.log(getWinners(getFinals(fifaData)));
+
+function getWinners(callback){
+    return callback.map(function(item){
+        if(item["Home Team Goals"] > item["Away Team Goals"]){
+            return `${["Home Team Name"]} won!`;
+        } else if (item["Home Team Goals"] < item["Away Team Goals"]){
+            return `${["Away Team Name"]} won!`;
+        } else {
+            return 'This is impossible!';
+        }
+    });
 };
 
-getWinners();
+const winners = finalsData.map(function(item){
+    if(item["Home Team Goals"] > item["Away Team Goals"]){
+        return `${item["Home Team Name"]} won!`;
+    } else {
+        return `${item["Away Team Name"]} won!`;
+    }
+});
+
+console.log(winners);
 
 /* Task 5: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
