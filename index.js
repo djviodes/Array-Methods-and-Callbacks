@@ -89,26 +89,30 @@ console.log(years);
 // console.log(getWinners(getFinals(fifaData)));
 
 function getWinners(callback){
-    return callback.map(function(item){
+    let winners = [];
+    callback.map(function(item){
         if(item["Home Team Goals"] > item["Away Team Goals"]){
-            return `${["Home Team Name"]} won!`;
+            winners.push(item["Home Team Name"]);
         } else if (item["Home Team Goals"] < item["Away Team Goals"]){
-            return `${["Away Team Name"]} won!`;
+            winners.push(item["Away Team Name"]);
         } else {
-            return 'This is impossible!';
+            winners.push(item["Win conditions"]);
         }
     });
+    return winners;
 };
 
-const winners = finalsData.map(function(item){
-    if(item["Home Team Goals"] > item["Away Team Goals"]){
-        return `${item["Home Team Name"]} won!`;
-    } else {
-        return `${item["Away Team Name"]} won!`;
-    }
-});
+// const winners = finalsData.map(function(item){
+//     if(item["Home Team Goals"] > item["Away Team Goals"]){
+//         return `${item["Home Team Name"]} won!`;
+//     } else if (item["Home Team Goals"] < item["Away Team Goals"]){
+//         return `${item["Away Team Name"]} won!`;
+//     } else {
+//         return `${item["Win conditions"]}`;
+//     }
+// });
 
-console.log(winners);
+console.log(getWinners(getFinals(fifaData)));
 
 /* Task 5: Implement a higher-order function called `getWinnersByYear` that accepts the following parameters and returns a set of strings "In {year}, {country} won the world cup!" 
 
