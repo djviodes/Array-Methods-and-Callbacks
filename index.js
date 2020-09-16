@@ -96,7 +96,7 @@ function getAverageGoals(data) {
     let addGoals = data.reduce(function(accumulator, item){
         return accumulator + item["Home Team Goals"] + item["Away Team Goals"];
     }, 0);
-    return addGoals / 851;
+    return Math.round(addGoals / (data.length - 1));
 };
 
 console.log(getAverageGoals(fifaData));
